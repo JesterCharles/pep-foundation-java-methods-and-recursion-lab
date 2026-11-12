@@ -1,185 +1,178 @@
 # Methods and Recursion lab: a text-analysis utility
 
-## Goal
+A note-taking app wants one report line per note: how many words it has, a shortened headline, and whether its ends mirror each other.
+You build that utility, `TextScan.java`, in seven linked tasks. You practise writing methods, overloading, static members, two-pointer loops and recursion, and each later task reuses methods you wrote earlier.
 
-Build one small text-analysis utility, `TextScan.java`, in seven linked tasks.
-A note-taking app wants one report line per note: how many words it has, a shortened headline and whether its ends mirror each other.
-Along the way you practise writing methods, overloading, static members, two-pointer loops and recursion, and every later task reuses the methods you wrote earlier.
-You build and test it with the real JDK and Maven on your own computer.
+## Quick start
 
-## Files
+The lab needs JDK 25 and Apache Maven 3.9 or later in the terminal. Troubleshooting shows how to check.
 
-**Edit exactly one file.** Every `TODO Task N` comment in it marks a task; the test failure lines carry the same task numbers:
+1. Open the lab project you were given in VS Code, then open its integrated terminal: **Terminal > New Terminal**.
+2. Go into the project folder. Every command in this lab runs there:
 
-- `starter/src/main/java/textscan/TextScan.java` - Tasks 1-7, one method per task; each method you finish becomes part of the one report line the utility produces. Task 8 is a workflow task with no code.
+   ```
+   cd starter
+   ```
 
-**Do not change anything else.** In particular:
+3. Before the first test run, download the lab's libraries once. This needs the internet, and prints nothing when it works:
 
-- `tests/textscan/TextScanTest.java` - the public tests your methods must pass
-- `starter/pom.xml` - the build is prewired
-- `expected/test-summary.txt` - the finished-state reference
+   ```
+   mvn -q dependency:go-offline
+   ```
 
-## Prerequisites
+4. Run the tests before you change anything:
 
-You need JDK 25 and Apache Maven 3.9 or later, the same setup as the Java Basics lab.
-Check both in a new terminal:
+   ```
+   mvn -q -o test
+   ```
 
-```
-java -version
-mvn -v
-```
-
-- `java -version` must report version 25.
-- `mvn -v` must report Apache Maven 3.9 or later, and its `Java version:` line must also say 25.
-
-This lab works the same on macOS, Linux and Windows.
-On Windows, use PowerShell or Command Prompt; the commands are the same.
-No Docker or other container tool is needed.
-
-## Setup (once, needs the internet)
-
-Open a terminal in the lab's root folder - the one that holds this README, `starter/` and `tests/` - and change into `starter` with `cd starter`; every command in this lab runs there. Then run:
+   **All 7 tests fail at first. That is expected: the TODOs are not done yet.**
+   The output ends with `Tests run: 7, Failures: 7`, and every failure line starts with its task number, such as `Task 1:`.
+5. Work through the checklist below in order. After each task, run `mvn -q -o test` again and read the remaining `Task N:` lines.
+6. **You are finished when `mvn -q -o test` prints nothing at all.** Then do Task 8, which has no test.
 
 ```
-mvn -q dependency:go-offline
+OPEN project -> cd starter -> setup (once) -> RUN tests: 7 fail (expected)
+  -> READ the "Task N:" lines -> EDIT the next TODO -> RUN tests again
+  -> repeat for Tasks 1-7 -> tests print nothing -> Task 8 (a note, no test) -> STOP
 ```
 
-It prints nothing when it succeeds.
-If you finished the Java Basics lab on this machine, it finds everything already downloaded.
-After this step, everything else in the lab runs offline.
+In words: open the project, run the tests, read which tasks fail, complete one task's TODO, run the tests again, and when they print nothing, write the Task 8 note.
 
-## Tasks
+## Checklist
 
-Open the lab's root folder in your IDE or editor; it holds one Maven project, `starter/pom.xml`, and if your editor asks, open or import that file as a Maven project, then open `starter/src/main/java/textscan/TextScan.java`. Whatever your editor shows, the test command below, run in a terminal in `starter`, is the result that counts.
-Each task is one method with a `TODO` comment; its comment says exactly what the method must return.
-The tests call every method with several inputs, including edge cases, and check only the results; they cannot see how you computed them.
+Tasks 1-7 are in `starter/src/main/java/textscan/TextScan.java`. Each one is a method with a `TODO` comment.
 
-After each task, run the one test command from the `starter` folder:
+- [ ] Task 1: `cleaned` (a helper method with one loop)
+- [ ] Task 2: `countWords` (reuse your own helper)
+- [ ] Task 3: both `headline` methods (overloading)
+- [ ] Task 4: `reverse` (two indexes)
+- [ ] Task 5: `matchingEnds` (two indexes)
+- [ ] Task 6: `countChar` (recursion)
+- [ ] Task 7: `report` and the `scansPerformed` counter (composing methods, static members)
+- [ ] Task 8: ask, verify, record (no code, no test)
 
-```
-mvn -q -o test
-```
+A task is done when no failure line starts with its number.
+Edit only `TextScan.java`. The tests in `tests/textscan/`, the build file `starter/pom.xml` and `expected/test-summary.txt` stay as they are.
 
-Every failure line starts with its task number, so you can work through the tasks in order.
+## Task steps
+
+Each method's `TODO` comment says exactly what it must return.
+The tests call every method with several inputs, including edge cases, and check only the results. They cannot see how you computed them.
 
 ### Task 1: cleaned
 
 1. Find the method `cleaned(String raw)` and its `TODO`.
-2. Build the result with one loop over `raw`: skip spaces at the ends, and let one space through between words however many the input has.
-   A helper that every later task calls is the point of this task; you write the loop once, here, and never again.
+2. Build the result with one loop over `raw`. Skip spaces at the ends, and let one space through between words, however many the input has.
+   Every later task calls this helper; that is the point of the task. You write the loop once, here, and never again.
 3. While it is wrong, you see lines such as `Task 1: cleaned("  hello   world ") ==> expected: <hello world> but was: <>`.
-4. Done when no line starting with `Task 1` appears.
 
 ### Task 2: countWords
 
 1. Find `countWords(String text)`.
-2. First call your own `cleaned(text)`; then counting words is just counting spaces plus one.
-   Decide what the method must return for a text with no words at all, and make sure every path through your method returns a value.
+2. First call your own `cleaned(text)`.
 3. While it is wrong, you see lines such as `Task 2: countWords("  one   two ")`.
-4. Done when no line starting with `Task 2` appears.
+
+<details><summary>Hint</summary>
+
+- After calling `cleaned(text)`, counting words is just counting spaces plus one.
+- Decide what the method must return for a text with no words at all, and make sure every path through your method returns a value.
+
+</details>
 
 ### Task 3: headline and its overload
 
-1. Find the two `headline` methods. Same name, different parameter lists: that is overloading.
-2. Write the two-argument version first: clean the text, return it unchanged when it fits in `max`, otherwise keep the first `max - 3` characters and add `"..."`.
+1. Find the two `headline` methods. They have the same name and different parameter lists: that is overloading.
+2. Write the two-argument version first. Clean the text, and return it unchanged when it fits in `max`. Otherwise keep the first `max - 3` characters and add `"..."`.
 3. Then write the one-argument version as a single line: `return headline(text, 24);`. It delegates; it must not repeat the shortening logic.
 4. While they are wrong, you see lines such as `Task 3: headline("  the quick   brown fox  ", 12), exactly 12 characters`.
-5. Done when no line starting with `Task 3` appears.
 
 ### Task 4: reverse
 
 1. Find `reverse(String text)`.
-2. Copy the characters with `toCharArray()`, then reverse with two indexes that move toward each other: one starts at the first character, one at the last; swap the pair through a temporary `char`, move both inward, and stop when they meet or cross. Build the result with `new String(letters)` - the original String itself can never change.
+2. Copy the characters with `toCharArray()`. Then reverse them with two indexes that move toward each other: one starts at the first character, the other at the last.
+   Swap each pair through a temporary `char`, move both indexes inward, and stop when they meet or cross.
+   Build the result with `new String(letters)`. The original String itself can never change.
 3. While it is wrong, you see lines such as `Task 4: reverse("scan") ==> expected: <nacs> but was: <?>`.
-4. Done when no line starting with `Task 4` appears.
 
 ### Task 5: matchingEnds
 
 1. Find `matchingEnds(String text)`.
-2. Use two indexes: one starting at the first character, one at the last.
-   Compare the pair, count when they match, then move both toward the middle.
-   Choose the loop condition so the indexes stop before they meet or cross; test your idea against a one-character text.
+2. Use two indexes, one starting at the first character and one at the last.
+   Compare the pair, count it when the characters match, then move both toward the middle.
+   Choose the loop condition so the indexes stop before they meet or cross.
 3. While it is wrong, you see lines such as `Task 5: matchingEnds("noon")`.
-4. Done when no line starting with `Task 5` appears.
-5. **Watch it run.** Set a breakpoint on your comparison line in the IDE, debug the test, and step through `matchingEnds("level")`: watch the two indexes close in on each other and see why the middle character never pairs with anything. If your editor cannot start that test in its debugger, debug `main` instead, with `matchingEnds("level")` in place of `matchingEnds("noon")` in its call.
+4. Optional: watch it run. Set a breakpoint on your comparison line, start the debugger, and step through `matchingEnds("level")`.
+   Watch the two indexes close in on each other, and see why the middle character never pairs with anything.
+   If your editor cannot start the test in its debugger, debug `main` instead, after changing its `matchingEnds("noon")` call to `matchingEnds("level")`.
+
+<details><summary>Hint</summary>
+
+Test your idea against a one-character text.
+
+</details>
 
 ### Task 6: countChar
 
 1. Find `countChar(String text, char target)`.
-2. Write it recursively, with no loop: the base case returns 0 for an empty text; otherwise check whether the first character matches and add the recursive call on `text.substring(1)`.
-3. If you see `StackOverflowError`, your recursion never reaches the base case; check which text you recurse on.
-4. While it is wrong, you see lines such as `Task 6: countChar("banana", 'a')`.
-5. Done when no line starting with `Task 6` appears.
+2. Write it recursively, with no loop. The base case returns 0 for an empty text. Otherwise check whether the first character matches, and add the result of the recursive call on `text.substring(1)`.
+3. While it is wrong, you see lines such as `Task 6: countChar("banana", 'a')`.
+
+<details><summary>Hint</summary>
+
+If you see `StackOverflowError`, your recursion never reaches the base case. Check which text you recurse on, and make sure the empty-text check comes first.
+
+</details>
 
 ### Task 7: report
 
-1. Find `report(String text)` and the static field `scansPerformed` at the top of the class.
-2. Compose the report line exactly as the comment shows, calling your own `countWords`, `headline`, `cleaned` and `matchingEnds`; do not re-implement any of them.
-3. Also increment `scansPerformed` by one on every call. The field is static, so every call updates the one shared counter that `scanCount()` reads.
+1. Find `report(String text)`, and the static field `scansPerformed` at the top of the class.
+2. Compose the report line exactly as the comment shows. Call your own `countWords`, `headline`, `cleaned` and `matchingEnds`; do not re-implement any of them.
+3. Also increase `scansPerformed` by one on every call. The field is static, so every call updates the one shared counter that `scanCount()` reads.
 4. While it is wrong, you see lines such as `Task 7: report("  the quick   brown fox  ")`.
-5. Done when no line starting with `Task 7` appears and the whole run prints nothing.
 
 ### Task 8: ask, verify, record (no test)
 
-No test checks this task; your note is the result, and it is how this course expects you to work with assistants from here on.
+No test checks this task. Your note is the result, and it is how this course expects you to work with AI assistants from now on.
 
-1. Pick one real question from this lab - why a loop misses the last word, why a recursion overflows, why two pointers must stop before crossing - and ask an AI assistant to EXPLAIN it, not to write the method for you.
-2. Verify the explanation yourself: run the tests, or step through the method in the debugger, and see whether the claim holds.
-3. Record one or two lines - in your notes or the commit message - stating what the assistant claimed and what you verified, for example: "assistant said my loop condition skipped the last pair; confirmed by stepping through matchingEnds(\"abca\")".
+1. Pick one real question from this lab, ask an AI assistant to explain it, and do not ask it to write the method for you.
+   For example: why does a loop miss the last word, why does a recursion overflow, or why must two pointers stop before crossing?
+2. Check the explanation yourself: run the tests, or step through the method in the debugger, and see whether the claim holds.
+3. Record one or two lines in your notes stating what the assistant claimed and what you verified.
+   For example: "assistant said my loop condition skipped the last pair; confirmed by stepping through matchingEnds(\"abca\")".
 
-## Test
+### About the test results
 
-The one test command, run from the `starter` folder, is:
+A passing run shows that each method returns the right results for the inputs the tests try.
+It does not check which Java constructs your code uses, so compare your code with each task's steps yourself.
 
-```
-mvn -q -o test
-```
+## Run the program
 
-- Before you start, all seven tests fail, and Maven ends with `Tests run: 7, Failures: 7`.
-- Each test lists every input that gave a wrong result. A passing run shows that each method returns the right results for those inputs; it does not check which Java constructs your code uses, so compare your code with each task's steps yourself.
-- If your code does not compile, Maven prints `COMPILATION ERROR` with the file, then `[line,column]`, then the compiler's message. Fix that line and run the test again.
-
-You can also run the utility itself, which prints one line per method:
+The utility prints one line per method. From `starter`:
 
 ```
 mvn -q -o compile
 java -cp target/classes textscan.TextScan
 ```
 
-Because `TextScan.java` is a single source file with no dependencies, the single-file shortcut also works, straight from the source and with no compile step:
+`TextScan.java` is a single source file with no dependencies, so Java can also run it straight from the source, with no compile step:
 
 ```
 java src/main/java/textscan/TextScan.java
 ```
 
-That shortcut is enough exactly here - one file, nothing external; the tested project as a whole still needs Maven, because the tests live in other files and use JUnit.
-
-## Expected output
-
-When every task is complete, `mvn -q -o test` prints nothing and exits with status 0.
-`expected/test-summary.txt` shows the full expected result, including the nine lines the program prints.
-
-## Offline note
-
-Only the setup step uses the network.
-The test command uses `-o` (offline), so it never downloads anything.
-If it reports that an artifact is missing from the local repository, run the setup step once more while online.
-
-## Cleanup
-
-The lab writes only the `starter/target` folder (compiled classes and test reports). Delete it from the `starter` folder:
-
-- macOS and Linux: `rm -rf target`
-- Windows PowerShell: `Remove-Item -Recurse -Force target`
-
-The JUnit and plugin downloads stay in your local Maven repository (`~/.m2/repository` by default) so later Java labs can reuse them.
-
-`starter/.gitignore` already keeps Maven's `starter/target` folder out of Git. Your editor and operating system may also create local files in the lab's root folder, such as `.idea/`, `.vscode/` or `.DS_Store`; they are not part of the lab, so if `git status` lists any of them, add them to a `.gitignore` file in the lab's root folder instead of committing them.
+That shortcut only works because the file is alone and needs nothing else. The tests live in other files and use JUnit, so testing the project still needs Maven.
+`expected/test-summary.txt` shows the finished result, including the nine lines the program prints.
 
 ## Troubleshooting
 
+- **`there is no POM in this directory`.** The terminal is not in `starter`. From the lab folder, run `cd starter` and try again.
+- **`COMPILATION ERROR`.** Your code does not compile yet. Maven names the file, then `[line,column]`, then the problem. Fix that line and run the tests again.
 - **`mvn: command not found`, or `'mvn' is not recognized`.** Maven's `bin` folder is not on your `PATH`. Add it, then open a new terminal.
-- **`mvn -v` shows a Java version other than 25.** Maven uses the JDK named by `JAVA_HOME` when it is set, otherwise the `java` on your `PATH`. Set `JAVA_HOME` to your JDK 25 folder, or unset it, then open a new terminal.
-- **`release version 25 not supported`.** Maven is running on an older JDK. Fix it as in the previous item.
-- **`Cannot access central in offline mode`, or a missing artifact.** The setup step has not completed. Run `mvn -q dependency:go-offline` once while online.
-- **`StackOverflowError` in Task 6.** The recursion has no reachable base case. Return 0 for the empty text before doing anything else.
+- **`mvn -v` shows a Java version other than 25, or you see `release version 25 not supported`.** Maven uses the JDK named by `JAVA_HOME` when it is set, otherwise the `java` on your `PATH`. Set `JAVA_HOME` to your JDK 25 folder, or unset it, then open a new terminal. Check with `java -version` and `mvn -v`.
+- **`Cannot access central in offline mode`, or a missing artifact.** The setup step has not finished. Run `mvn -q dependency:go-offline` once while online.
+
+## Cleanup (optional)
+
+Maven writes only the `starter/target` folder, and Git already ignores it.
+To delete it, run `rm -rf target` from `starter`. In Windows PowerShell, run `Remove-Item -Recurse -Force target`.
