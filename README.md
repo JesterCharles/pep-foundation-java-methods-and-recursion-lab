@@ -70,9 +70,15 @@ The tests call every method with several inputs, including edge cases, and check
 ### Task 2: countWords
 
 1. Find `countWords(String text)`.
-2. First call your own `cleaned(text)`. After that, counting words is just counting spaces plus one.
-   Decide what the method must return for a text with no words at all, and make sure every path through your method returns a value.
+2. First call your own `cleaned(text)`.
 3. While it is wrong, you see lines such as `Task 2: countWords("  one   two ")`.
+
+<details><summary>Hint</summary>
+
+- After calling `cleaned(text)`, counting words is just counting spaces plus one.
+- Decide what the method must return for a text with no words at all, and make sure every path through your method returns a value.
+
+</details>
 
 ### Task 3: headline and its overload
 
@@ -94,18 +100,29 @@ The tests call every method with several inputs, including edge cases, and check
 1. Find `matchingEnds(String text)`.
 2. Use two indexes, one starting at the first character and one at the last.
    Compare the pair, count it when the characters match, then move both toward the middle.
-   Choose the loop condition so the indexes stop before they meet or cross. Test your idea against a one-character text.
+   Choose the loop condition so the indexes stop before they meet or cross.
 3. While it is wrong, you see lines such as `Task 5: matchingEnds("noon")`.
 4. Optional: watch it run. Set a breakpoint on your comparison line, start the debugger, and step through `matchingEnds("level")`.
    Watch the two indexes close in on each other, and see why the middle character never pairs with anything.
    If your editor cannot start the test in its debugger, debug `main` instead, after changing its `matchingEnds("noon")` call to `matchingEnds("level")`.
 
+<details><summary>Hint</summary>
+
+Test your idea against a one-character text.
+
+</details>
+
 ### Task 6: countChar
 
 1. Find `countChar(String text, char target)`.
 2. Write it recursively, with no loop. The base case returns 0 for an empty text. Otherwise check whether the first character matches, and add the result of the recursive call on `text.substring(1)`.
-3. If you see `StackOverflowError`, your recursion never reaches the base case. Check which text you recurse on, and make sure the empty-text check comes first.
-4. While it is wrong, you see lines such as `Task 6: countChar("banana", 'a')`.
+3. While it is wrong, you see lines such as `Task 6: countChar("banana", 'a')`.
+
+<details><summary>Hint</summary>
+
+If you see `StackOverflowError`, your recursion never reaches the base case. Check which text you recurse on, and make sure the empty-text check comes first.
+
+</details>
 
 ### Task 7: report
 
