@@ -22,7 +22,9 @@ class VisibleTests {
                 () -> assertEquals("hello world", TextScan.cleaned("  hello   world "),
                         "Task 1: cleaned(\"  hello   world \")"),
                 () -> assertEquals("one", TextScan.cleaned("one"), "Task 1: cleaned(\"one\")"),
-                () -> assertEquals("a b c", TextScan.cleaned("a b c"), "Task 1: cleaned(\"a b c\")"));
+                () -> assertEquals("a b c", TextScan.cleaned("a b c"), "Task 1: cleaned(\"a b c\")"),
+                () -> assertEquals("", TextScan.cleaned("   "), "Task 1: cleaned(\"   \")"),
+                () -> assertEquals("", TextScan.cleaned(""), "Task 1: cleaned(\"\")"));
     }
 
     @Test

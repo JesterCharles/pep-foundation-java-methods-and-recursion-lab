@@ -8,16 +8,9 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-/** Held-out tests: graded on submit, never shown to the learner. Edge cases for Tasks 1-6. */
+/** Held-out tests: graded on submit, never shown to the learner. Edge cases for Tasks 2-6. */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class HeldOutTests {
-
-    @Test
-    void task1CleanedEdgeCases() {
-        assertAll(
-                () -> assertEquals("", TextScan.cleaned("   "), "Task 1: cleaned(\"   \")"),
-                () -> assertEquals("", TextScan.cleaned(""), "Task 1: cleaned(\"\")"));
-    }
 
     @Test
     void task2CountWordsEdgeCases() {
