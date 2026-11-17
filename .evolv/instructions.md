@@ -5,7 +5,7 @@ You build that utility, `TextScan.java`, in seven linked tasks. You practise wri
 
 ## Quick start
 
-1. Open the lab project. The files you edit are in `src/main/java/textscan/`; the checklist below names them.
+1. Open the lab project. The files you edit are in `src/main/java/exercise/`; the checklist below names them.
 2. Select **Run Tests** before you change anything.
 
    **All 7 tests fail at first. That is expected: the TODOs are not done yet.**
@@ -23,7 +23,7 @@ In words: open the project, run the tests, read which tasks fail, complete one t
 
 ## Checklist
 
-Tasks 1-7 are in `src/main/java/textscan/TextScan.java`. Each one is a method with a `TODO` comment.
+Tasks 1-7 are in `src/main/java/exercise/TextScan.java`. Each one is a method with a `TODO` comment.
 
 - [ ] Task 1: `cleaned` (a helper method with one loop)
 - [ ] Task 2: `countWords` (reuse your own helper)
@@ -35,7 +35,7 @@ Tasks 1-7 are in `src/main/java/textscan/TextScan.java`. Each one is a method wi
 - [ ] Task 8: ask, verify, record (no code, no test)
 
 A task is done when no failure message starts with its number.
-Edit only `TextScan.java`. The tests in `src/test/java/textscan/` are restored to their original state before your work is graded, so changes to them do not count. Leave the build file `pom.xml` and `expected/test-summary.txt` as they are.
+Edit only `TextScan.java`. The tests in `src/test/java/exercise/` are restored to their original state before your work is graded, so changes to them do not count. Leave the build file `pom.xml` and `expected/test-summary.txt` as they are.
 
 ## Task steps
 
@@ -134,13 +134,13 @@ The utility prints one line per method. In a terminal, from the project folder:
 
 ```
 mvn -q compile
-java -cp target/classes textscan.TextScan
+java -cp target/classes exercise.TextScan
 ```
 
 `TextScan.java` is a single source file with no dependencies, so Java can also run it straight from the source, with no compile step:
 
 ```
-java src/main/java/textscan/TextScan.java
+java src/main/java/exercise/TextScan.java
 ```
 
 That shortcut only works because the file is alone and needs nothing else. The tests live in other files and use JUnit, so testing the project still needs Maven.

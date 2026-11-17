@@ -1,4 +1,4 @@
-package textscan;
+package exercise;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder;
  * with several inputs, including edge cases, and checks only the results.
  */
 @TestMethodOrder(MethodOrderer.MethodName.class)
-class TextScanTest {
+class VisibleTests {
 
     @Test
     void task1Cleaned() {

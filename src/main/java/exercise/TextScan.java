@@ -1,4 +1,4 @@
-package textscan;
+package exercise;
 
 /**
  * Methods and Recursion lab: a small text-analysis utility.
