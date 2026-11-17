@@ -6,7 +6,7 @@ package exercise;
  * Every method receives its input as parameters and returns its result; the
  * later tasks reuse the earlier methods, so the utility grows into one tool.
  * The visible tests (Run Tests) and the held-out tests (run on Submit) call each
- * method with several inputs, including edge cases, and check only the results. The lab instructions list the steps for every task.
+ * method with several inputs, including edge cases, and check only the results. The lab README lists the steps for every task.
  * main is complete: it prints one report line per finished task.
  */
 public class TextScan {
