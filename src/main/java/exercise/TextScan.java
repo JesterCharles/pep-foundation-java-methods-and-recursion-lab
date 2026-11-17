@@ -5,8 +5,8 @@ package exercise;
  * Complete the methods marked TODO, one task at a time.
  * Every method receives its input as parameters and returns its result; the
  * later tasks reuse the earlier methods, so the utility grows into one tool.
- * The public tests call each method with several inputs, including edge cases,
- * and check only the results. The lab instructions list the steps for every task.
+ * The visible tests (Run Tests) and the held-out tests (run on Submit) call each
+ * method with several inputs, including edge cases, and check only the results. The lab instructions list the steps for every task.
  * main is complete: it prints one report line per finished task.
  */
 public class TextScan {
@@ -20,7 +20,7 @@ public class TextScan {
     // every run of spaces inside it collapsed to one single space.
     // cleaned("  hello   world ") is "hello world"; cleaned("   ") is "".
     // Later tasks call this method instead of repeating the same loop.
-    static String cleaned(String raw) {
+    public static String cleaned(String raw) {
         return ""; // TODO: build the cleaned text with one pass over raw
     }
 
@@ -28,20 +28,20 @@ public class TextScan {
     // A word is a run of non-space characters; cleaned(...) does the tidying,
     // so count within cleaned(text). countWords("  one   two ") is 2;
     // countWords("   ") is 0.
-    static int countWords(String text) {
+    public static int countWords(String text) {
         return -1; // TODO: call cleaned(text), then count the words in it
     }
 
     // Task 3a (overloading): the one-argument headline uses the house width, 24.
     // It must delegate to the two-argument overload, not repeat its logic.
-    static String headline(String text) {
+    public static String headline(String text) {
         return "?"; // TODO: return headline(text, 24)
     }
 
     // Task 3b (overloading): the cleaned text, shortened to at most max
     // characters. If the cleaned text is longer than max, keep the first
     // max - 3 characters and end with "..." so the result is exactly max long.
-    static String headline(String text, int max) {
+    public static String headline(String text, int max) {
         return "?"; // TODO: clean the text, then shorten it when it is too long
     }
 
@@ -49,7 +49,7 @@ public class TextScan {
     // toCharArray(), swap the pair under two indexes that move toward each
     // other (a temporary char holds one of them), and build the result with
     // new String(letters). reverse("scan") is "nacs"; reverse("") is "".
-    static String reverse(String text) {
+    public static String reverse(String text) {
         return "?"; // TODO: swap pairs with two indexes until they meet or cross
     }
 
@@ -57,7 +57,7 @@ public class TextScan {
     // One index starts at the first character, one at the last; compare,
     // then move both toward the middle, and stop before they meet or cross.
     // matchingEnds("noon") is 2; matchingEnds("level") is 2; matchingEnds("java") is 0.
-    static int matchingEnds(String text) {
+    public static int matchingEnds(String text) {
         return -1; // TODO: compare pairs with two indexes moving toward each other
     }
 
@@ -65,7 +65,7 @@ public class TextScan {
     // recursively: an empty text contains 0, otherwise check the first
     // character and recurse on the rest with substring(1).
     // countChar("banana", 'a') is 3. No loop in this method.
-    static int countChar(String text, char target) {
+    public static int countChar(String text, char target) {
         return -1; // TODO: base case for "", then first character + recursive call
     }
 
@@ -75,13 +75,13 @@ public class TextScan {
     // words is countWords(text), headline is headline(text) and ends is
     // matchingEnds applied to the cleaned text. Each call to report(...) also
     // increments scansPerformed by one, so scanCount() grows by one per report.
-    static String report(String text) {
+    public static String report(String text) {
         return "?"; // TODO: compose the line from the earlier methods
     }
 
     // Complete: reads the shared counter. It is static because the count
     // belongs to the class as a whole, not to one object.
-    static int scanCount() {
+    public static int scanCount() {
         return scansPerformed;
     }
 
